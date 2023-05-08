@@ -1,38 +1,35 @@
-// Récupération du formulaire et du conteneur de résultats
-const form = document.getElementById("search-form");
-const resultsContainer = document.getElementById("results");
-
-// Écouteur d'événement sur la soumission du formulaire
-form.addEventListener("submit", function(e) {
-  e.preventDefault(); // Empêche le comportement par défaut du formulaire
-
-  // Récupération des valeurs des champs de saisie
-  const villeDepart = document.getElementById("ville-depart").value;
-  const villeArrivee = document.getElementById("ville-arrivee").value;
-
-  // Appel à une fonction pour récupérer les itinéraires depuis une API ou un service
-  const itineraires = rechercherItineraires(villeDepart, villeArrivee);
-
-  // Effacer les résultats précédents
-  resultsContainer.innerHTML = "";
-
-  // Afficher les itinéraires dans le conteneur de résultats
-  itineraires.forEach(function(itineraire) {
-    const result = document.createElement("div");
-    result.innerHTML = "<p>Itinéraire : " + itineraire + "</p>";
-    resultsContainer.appendChild(result);
-  });
-});
-
-// Fonction fictive pour simuler la récupération des itinéraires depuis une API ou un service
+// Fonction pour effectuer la requête d'itinéraire à l'API OpenRouteService
 function rechercherItineraires(villeDepart, villeArrivee) {
-  // Ici, vous pouvez effectuer une requête vers une API ou un service
-  // pour récupérer les itinéraires en fonction des villes de départ et d'arrivée
-  // et retourner les résultats sous forme d'un tableau
-  // Cela dépendra de l'API ou du service que vous utilisez réellement
-  // Dans cet exemple, je vais simplement retourner des valeurs statiques
+  // Clé d'accès à l'API OpenRouteService (remplacez par votre propre clé)
+  const apiKey = '5b3ce3597851110001cf624815dbf64ad38949df9bfca1525c2137c6';
 
-  return [
-    "Itinéraire 1",
-    "Itinéraire 2",
-    "
+  // URL de l'API OpenRouteService
+  const apiUrl = `https://api.openrouteservice.org/v2/directions/driving-car?api_key=${apiKey}&start=${villeDepart}&end=${villeArrivee}`;
+
+  // Effectuer la requête GET à l'API
+  fetch(apiUrl)
+    .then(response => response.json())
+    .then(data => {
+      // Traiter la réponse de l'API et récupérer les itinéraires
+      const itineraires = [];
+
+      // Boucle sur les itinéraires retournés par l'API
+      data.features.forEach(feature => {
+        const itineraire = {
+          distance: feature.properties.summary.distance,
+          duration: feature.properties.summary.duration,
+          instructions: feature.properties.segments[0].steps.map(step => step.instruction)
+        };
+
+        // Ajouter l'itinéraire à la liste des résultats
+        itineraires.push(itineraire);
+      });
+
+      // Afficher les itinéraires dans la console (à des fins de démonstration)
+      console.log(itineraires);
+    })
+    .catch(error => {
+      // Gérer les erreurs de requête
+      console.error('Une erreur s\'est produite lors de la récupération des itinéraires :', error);
+    });
+}
