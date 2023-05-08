@@ -27,7 +27,7 @@ searchForm.addEventListener('submit', function(event) {
 
 // Fonction de géocodage avec Mapbox
 function geocoder(ville, callback) {
-  const accessToken = 'pk.eyJ1Ijoidml2ZWxlaGlwaG9wIiwiYSI6ImNsaGY3aWJtdTEzengzbXBjdGRuN2g5dmMifQ.bd1-dun6CWxBoQG006CgOw';
+  const accessToken = 'pk.eyJ1Ijoidml2ZWxlaGlwaG9wIiwiYSI6ImNsaGY3ZnNteTFucHEzZXBjdWRpbHVleWMifQ.oQnzrda4UJ1rMR1YeEINhA';
   const geocodingApiUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${ville}.json?access_token=${accessToken}`;
 
   fetch(geocodingApiUrl)
