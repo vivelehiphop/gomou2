@@ -1,0 +1,34 @@
+/* Réinitialisation des styles par défaut */
+body, h1, p {
+  margin: 0;
+  padding: 0;
+}
+
+/* Styles spécifiques à l'interface */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+header {
+  background-color: #222;
+  padding: 20px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 36px;
+  color: #fff;
+}
+
+main {
+  padding: 20px;
+}
+
+footer {
+  background-color: #222;
+  padding: 20px;
+  text-align: center;
+  color: #fff;
+}
