@@ -21,17 +21,6 @@ function rechercherItineraires(villeDepart, villeArrivee) {
   // URL de l'API OpenRouteService
   const apiUrl = `https://api.openrouteservice.org/v2/directions/driving-car?api_key=${apiKey}&start=${villeDepart}&end=${villeArrivee}`;
 
-  // Sélectionner l'élément où afficher les résultats
-  const resultatContainer = document.getElementById('resultats');
-
-  // Effacer les résultats précédents, le cas échéant
-  resultatContainer.innerHTML = '';
-
-  // Afficher un message de log sur la page
-  const logMessage = document.createElement('p');
-  logMessage.textContent = 'Recherche d\'itinéraire en cours...';
-  resultatContainer.appendChild(logMessage);
-
   // Effectuer la requête GET à l'API
   fetch(apiUrl)
     .then(response => response.json())
@@ -47,6 +36,12 @@ function rechercherItineraires(villeDepart, villeArrivee) {
           instructions: feature.properties.segments[0].steps.map(step => step.instruction)
         };
       });
+
+      // Sélectionner l'élément où afficher les résultats
+      const resultatContainer = document.getElementById('resultats');
+
+      // Effacer les résultats précédents, le cas échéant
+      resultatContainer.innerHTML = '';
 
       // Afficher les itinéraires sur la page
       itineraires.forEach((itineraire, index) => {
@@ -70,9 +65,4 @@ function rechercherItineraires(villeDepart, villeArrivee) {
         });
 
         resultat.appendChild(titre);
-        resultat.appendChild(distance);
-        resultat.appendChild(duree);
-        resultat.appendChild(instructions);
-
-        resultatContainer.appendChild(resultat);
-     
+       
