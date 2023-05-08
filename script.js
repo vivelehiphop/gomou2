@@ -65,4 +65,11 @@ function rechercherItineraires(villeDepart, villeArrivee) {
         });
 
         resultat.appendChild(titre);
-       
+        resultat.appendChild(distance);
+        resultat.appendChild(duree);
+        resultat.appendChild(instructions);
+
+        resultatContainer.appendChild(resultat);
+      });
+    });
+}
