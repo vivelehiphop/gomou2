@@ -75,5 +75,4 @@ function rechercherItineraires(villeDepart, villeArrivee) {
         resultatContainer.appendChild(resultat);
       });
     })
-    .catch(error => {
-      // Gérer les erreurs de requête
+  

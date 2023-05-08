@@ -1,3 +1,18 @@
+// Sélectionner le formulaire de recherche
+const searchForm = document.getElementById('search-form');
+
+// Ajouter un gestionnaire d'événement pour l'événement "submit" du formulaire
+searchForm.addEventListener('submit', function(event) {
+  event.preventDefault(); // Empêcher le rechargement de la page
+
+  // Récupérer les valeurs des champs de saisie
+  const villeDepart = document.getElementById('ville-depart').value;
+  const villeArrivee = document.getElementById('ville-arrivee').value;
+
+  // Appeler la fonction de recherche d'itinéraire avec les valeurs des champs de saisie
+  rechercherItineraires(villeDepart, villeArrivee);
+});
+
 // Fonction pour effectuer la requête d'itinéraire à l'API OpenRouteService
 function rechercherItineraires(villeDepart, villeArrivee) {
   // Clé d'accès à l'API OpenRouteService (remplacez par votre propre clé)
@@ -7,7 +22,7 @@ function rechercherItineraires(villeDepart, villeArrivee) {
   const apiUrl = `https://api.openrouteservice.org/v2/directions/driving-car?api_key=${apiKey}&start=${villeDepart}&end=${villeArrivee}`;
 
   // Sélectionner l'élément où afficher les résultats
- const resultatContainer = document.getElementById('resultats');
+  const resultatContainer = document.getElementById('resultats');
 
   // Effacer les résultats précédents, le cas échéant
   resultatContainer.innerHTML = '';
@@ -62,22 +77,3 @@ function rechercherItineraires(villeDepart, villeArrivee) {
     })
     .catch(error => {
       // Gérer les erreurs de requête
-      console.error('Une erreur s\'est produite lors de la récupération des itinéraires :', error);
-    });
-}
-
-
-// Sélectionner le formulaire de recherche
-const searchForm = document.getElementById('search-form');
-
-// Ajouter un gestionnaire d'événement pour l'événement "submit" du formulaire
-searchForm.addEventListener('submit', function(event) {
-  event.preventDefault(); // Empêcher le rechargement de la page
-
-  // Récupérer les valeurs des champs de saisie
-  const villeDepart = document.getElementById('ville-depart').value;
-  const villeArrivee = document.getElementById('ville-arrivee').value;
-
-  // Appeler la fonction de recherche d'itinéraire avec les valeurs des champs de saisie
-  rechercherItineraires(villeDepart, villeArrivee);
-});
