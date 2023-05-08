@@ -7,7 +7,7 @@ function rechercherItineraires(villeDepart, villeArrivee) {
   const apiUrl = `https://api.openrouteservice.org/v2/directions/driving-car?api_key=${apiKey}&start=${villeDepart}&end=${villeArrivee}`;
 
   // Sélectionner l'élément où afficher les résultats
-  const resultatContainer = document.getElementById('resultats');
+ const resultatContainer = document.getElementById('resultats');
 
   // Effacer les résultats précédents, le cas échéant
   resultatContainer.innerHTML = '';
