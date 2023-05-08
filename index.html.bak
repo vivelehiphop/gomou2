@@ -1,17 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Emprunte Carbone</title>
+  <title>Interface de recherche d'itinéraire</title>
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>L'emprunte carbone de votre voyage</h1>
-  </header>
-  
-  <main>
- 
- <h1>Recherche d'itinéraire</h1>
+  <h1>Recherche d'itinéraire</h1>
   <form id="search-form">
     <label for="ville-depart">Ville de départ :</label>
     <input type="text" id="ville-depart" name="ville-depart" placeholder="Entrez la ville de départ" required>
@@ -25,10 +19,5 @@
   <div id="results"></div>
 
   <script src="script.js"></script>
-</main>
-
-  <footer>
-    <p>PS: Le meilleur moyen de ne pas consommer, c'est de ne pas voyager.</p>
-  </footer>
 </body>
 </html>
