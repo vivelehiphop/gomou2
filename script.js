@@ -32,18 +32,12 @@ function rechercherItineraires(villeDepart, villeArrivee) {
     .then(response => response.json())
     .then(data => {
       // Traiter la réponse de l'API et récupérer les itinéraires
-      const itineraires = [];
-
-      // Boucle sur les itinéraires retournés par l'API
-      data.features.forEach(feature => {
-        const itineraire = {
+      const itineraires = data.features.map(feature => {
+        return {
           distance: feature.properties.summary.distance,
           duration: feature.properties.summary.duration,
           instructions: feature.properties.segments[0].steps.map(step => step.instruction)
         };
-
-        // Ajouter l'itinéraire à la liste des résultats
-        itineraires.push(itineraire);
       });
 
       // Afficher les itinéraires sur la page
@@ -75,4 +69,8 @@ function rechercherItineraires(villeDepart, villeArrivee) {
         resultatContainer.appendChild(resultat);
       });
     })
-  
+    .catch(error => {
+      console.error('Une erreur s\'est produite lors de la recherche d\'itinéraire :', error);
+    });
+}
+

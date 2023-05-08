@@ -16,7 +16,7 @@ searchForm.addEventListener('submit', function(event) {
 // Fonction pour effectuer la requête d'itinéraire à l'API OpenRouteService
 function rechercherItineraires(villeDepart, villeArrivee) {
   // Clé d'accès à l'API OpenRouteService (remplacez par votre propre clé)
-  const apiKey = '5b3ce3597851110001cf624815dbf64ad38949df9bfca1525c2137c6';
+  const apiKey = 'YOUR_API_KEY';
 
   // URL de l'API OpenRouteService
   const apiUrl = `https://api.openrouteservice.org/v2/directions/driving-car?api_key=${apiKey}&start=${villeDepart}&end=${villeArrivee}`;
@@ -32,18 +32,12 @@ function rechercherItineraires(villeDepart, villeArrivee) {
     .then(response => response.json())
     .then(data => {
       // Traiter la réponse de l'API et récupérer les itinéraires
-      const itineraires = [];
-
-      // Boucle sur les itinéraires retournés par l'API
-      data.features.forEach(feature => {
-        const itineraire = {
+      const itineraires = data.features.map(feature => {
+        return {
           distance: feature.properties.summary.distance,
           duration: feature.properties.summary.duration,
           instructions: feature.properties.segments[0].steps.map(step => step.instruction)
         };
-
-        // Ajouter l'itinéraire à la liste des résultats
-        itineraires.push(itineraire);
       });
 
       // Afficher les itinéraires sur la page
@@ -76,4 +70,7 @@ function rechercherItineraires(villeDepart, villeArrivee) {
       });
     })
     .catch(error => {
-      // Gérer les erreurs de requête
+      console.error('Une erreur s\'est produite lors de la recherche d\'itinéraire :', error);
+    });
+}
+
