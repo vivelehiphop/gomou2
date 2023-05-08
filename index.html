@@ -6,7 +6,7 @@
 </head>
 <body>
   <h1>Recherche d'itinéraire</h1>
-  <form>
+  <form id="search-form">
     <label for="ville-depart">Ville de départ :</label>
     <input type="text" id="ville-depart" name="ville-depart" placeholder="Entrez la ville de départ" required>
     
@@ -15,5 +15,9 @@
     
     <input type="submit" value="Rechercher">
   </form>
+
+  <div id="results"></div>
+
+  <script src="script.js"></script>
 </body>
 </html>
