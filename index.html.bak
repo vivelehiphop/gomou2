@@ -10,18 +10,17 @@
   </header>
   
   <main>
- 
- <h1>Recherche d'itinéraire</h1>
-  <form id="search-form">
-    <label for="ville-depart">Ville de départ :</label>
-    <input type="text" id="ville-depart" name="ville-depart" placeholder="Entrez la ville de départ" required>
+    <h1>Recherche d'itinéraire</h1>
+    <form id="search-form">
+      <label for="ville-depart">Ville de départ :</label>
+      <input type="text" id="ville-depart" name="ville-depart" placeholder="Entrez la ville de départ" required>
     
-    <label for="ville-arrivee">Ville d'arrivée :</label>
-    <input type="text" id="ville-arrivee" name="ville-arrivee" placeholder="Entrez la ville d'arrivée" required>
+      <label for="ville-arrivee">Ville d'arrivée :</label>
+      <input type="text" id="ville-arrivee" name="ville-arrivee" placeholder="Entrez la ville d'arrivée" required>
     
-    <input type="submit" value="Rechercher">
-  </form>
-</main>
+      <input type="submit" value="Rechercher">
+    </form>
+  </main>
 
   <footer>
     <p>PS: Le meilleur moyen de ne pas consommer, c'est de ne pas voyager.</p>
@@ -30,6 +29,5 @@
   <div id="resultats"></div>
 
   <script src="script.js"></script>
-
 </body>
 </html>
