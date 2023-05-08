@@ -65,3 +65,19 @@ function rechercherItineraires(villeDepart, villeArrivee) {
       console.error('Une erreur s\'est produite lors de la récupération des itinéraires :', error);
     });
 }
+
+
+// Sélectionner le formulaire de recherche
+const searchForm = document.getElementById('search-form');
+
+// Ajouter un gestionnaire d'événement pour l'événement "submit" du formulaire
+searchForm.addEventListener('submit', function(event) {
+  event.preventDefault(); // Empêcher le rechargement de la page
+
+  // Récupérer les valeurs des champs de saisie
+  const villeDepart = document.getElementById('ville-depart').value;
+  const villeArrivee = document.getElementById('ville-arrivee').value;
+
+  // Appeler la fonction de recherche d'itinéraire avec les valeurs des champs de saisie
+  rechercherItineraires(villeDepart, villeArrivee);
+});
