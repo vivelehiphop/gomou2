@@ -3,10 +3,12 @@
 <head>
   <title>Emprunte Carbone</title>
   <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.js"></script>
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.css" rel="stylesheet" />
 </head>
 <body>
   <header>
-    <h1>L'emprunte carbone de votre voyage 45</h1>
+    <h1>L'emprunte carbone de votre voyage l'été prochaine</h1>
   </header>
   
   <main>
