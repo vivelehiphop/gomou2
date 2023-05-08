@@ -27,10 +27,18 @@ function rechercherItineraires(villeDepart, villeArrivee) {
   // Effacer les résultats précédents, le cas échéant
   resultatContainer.innerHTML = '';
 
+  // Afficher un message de log sur la page
+  const logMessage = document.createElement('p');
+  logMessage.textContent = 'Recherche d\'itinéraire en cours...';
+  resultatContainer.appendChild(logMessage);
+
   // Effectuer la requête GET à l'API
   fetch(apiUrl)
     .then(response => response.json())
     .then(data => {
+      // Afficher la réponse de l'API dans la console du navigateur
+      console.log(data);
+
       // Traiter la réponse de l'API et récupérer les itinéraires
       const itineraires = data.features.map(feature => {
         return {
@@ -67,10 +75,4 @@ function rechercherItineraires(villeDepart, villeArrivee) {
         resultat.appendChild(instructions);
 
         resultatContainer.appendChild(resultat);
-      });
-    })
-    .catch(error => {
-      console.error('Une erreur s\'est produite lors de la recherche d\'itinéraire :', error);
-    });
-}
-
+     

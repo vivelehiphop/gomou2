@@ -16,7 +16,7 @@ searchForm.addEventListener('submit', function(event) {
 // Fonction pour effectuer la requête d'itinéraire à l'API OpenRouteService
 function rechercherItineraires(villeDepart, villeArrivee) {
   // Clé d'accès à l'API OpenRouteService (remplacez par votre propre clé)
-  const apiKey = 'YOUR_API_KEY';
+  const apiKey = '5b3ce3597851110001cf624815dbf64ad38949df9bfca1525c2137c6';
 
   // URL de l'API OpenRouteService
   const apiUrl = `https://api.openrouteservice.org/v2/directions/driving-car?api_key=${apiKey}&start=${villeDepart}&end=${villeArrivee}`;
