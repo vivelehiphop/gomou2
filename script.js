@@ -59,7 +59,7 @@ function rechercherItineraires(departCoordinates, arriveeCoordinates) {
       // Traiter la réponse de l'API et récupérer les itinéraires
       const itineraires = data.features.map(feature => {
         return {
-          distance: feature.properties.summary.distance,
+          distance: feature.properties.summary.distance / 1000,
           duration: feature.properties.summary.duration,
           instructions: feature.properties.segments[0].steps.map(step => step.instruction)
         };
@@ -79,7 +79,8 @@ function rechercherItineraires(departCoordinates, arriveeCoordinates) {
         titre.textContent = `Itinéraire ${index + 1}`;
 
         const distance = document.createElement('p');
-        distance.textContent = `Distance : ${itineraire.distance} mètres`;
+        
+distance.textContent = `Distance : ${itineraire.distance} km`;
 
         const duree = document.createElement('p');
         const durationHours = Math.floor(itineraire.duration / 3600);
