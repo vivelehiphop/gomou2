@@ -24,11 +24,13 @@
     </form>
   </main>
 
+ <div id="resultats"></div>
+
   <footer>
     <p>PS: Le meilleur moyen de ne pas consommer, c'est de ne pas voyager.</p>
   </footer>
   
-  <div id="resultats"></div>
+ 
 
   <script src="script.js"></script>
 </body>
