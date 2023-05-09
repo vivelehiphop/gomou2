@@ -75,8 +75,9 @@ th:first-child {
   text-align: center;
 }
 
-/* Style de la ligne "empreinte carbone" */
-tr.empreinte-carbone {
-  font-weight: bold;
-  background-color: #ffcccc; /* Couleur de fond pour faire ressortir */
+/* Style pour la ligne "empreinte carbone" */
+#tableau tr.empreinte-carbone {
+  background-color: #ffdada; /* Couleur de fond */
+  color: #ff0000; /* Couleur du texte */
+  font-weight: bold; /* Texte en gras */
 }
