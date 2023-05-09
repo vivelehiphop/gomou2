@@ -138,9 +138,6 @@ const partQuotaTransport = (empreinteCarbone / 2000) * 100;
 const ligneQuotaTransport = document.createElement('tr');
 ligneQuotaTransport.innerHTML = `
   <td>Part du quota transport annuel</td>
-  <td></td>
-  <td></td>
-  <td></td>
   <td>${partQuotaTransport.toFixed(2)}%</td>
 `;
 

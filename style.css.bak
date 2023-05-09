@@ -43,8 +43,8 @@ header {
 /* Style du tableau */
 table {
   border-collapse: collapse;
-  width: 100%;
-  margin-bottom: 20px;
+  width: 80%;
+  margin: 20px auto; /* Centrer le tableau horizontalement */
 }
 
 /* Style des cellules */
@@ -73,4 +73,10 @@ tr:nth-child(even) {
 /* Centrage du nom de l'itinéraire */
 th:first-child {
   text-align: center;
+}
+
+/* Style de la ligne "empreinte carbone" */
+tr.empreinte-carbone {
+  font-weight: bold;
+  background-color: #ffcccc; /* Couleur de fond pour faire ressortir */
 }
