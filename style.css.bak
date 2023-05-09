@@ -10,7 +10,7 @@ header {
 }
 
 footer {
-  background-color: #808080; /* Fond rouge bordeaux */
+  background-color: #efefef; /* Fond gris */
   padding: 20px;
   text-align: left;
     position: fixed;

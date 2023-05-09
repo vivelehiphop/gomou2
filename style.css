@@ -20,13 +20,13 @@ footer {
 }
 
 #ville-depart {
-  background-color: blue; /* Fond bleu */
-  color: white; /* Texte blanc */
+  background-color: #95DBF9; /* Fond bleu */
+  color: #032F42; 
 }
 
 #ville-arrivee {
-  background-color: red; /* Fond rouge */
-  color: white; /* Texte blanc */
+  background-color: #F09C8A; /* Fond rouge */
+  color: #631706; 
 }
 
 #resultats {
