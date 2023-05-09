@@ -79,8 +79,8 @@ function rechercherItineraires(departCoordinates, arriveeCoordinates) {
         titre.textContent = `Itinéraire ${index + 1}`;
 
         const distance = document.createElement('p');
-        const distance.km = Math.floor(itineraire.duration / 3600);
-		distance.textContent = `Distance : ${itineraire.distance} km`;
+        
+distance.textContent = `Distance : ${itineraire.distance} km`;
 
         const duree = document.createElement('p');
         const durationHours = Math.floor(itineraire.duration / 3600);

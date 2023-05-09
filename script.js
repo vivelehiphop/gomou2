@@ -59,7 +59,7 @@ function rechercherItineraires(departCoordinates, arriveeCoordinates) {
       // Traiter la réponse de l'API et récupérer les itinéraires
       const itineraires = data.features.map(feature => {
         return {
-          distance: feature.properties.summary.distance / 1000,
+          distance: (feature.properties.summary.distance / 1000).toFixed(1),
           duration: feature.properties.summary.duration,
           instructions: feature.properties.segments[0].steps.map(step => step.instruction)
         };
