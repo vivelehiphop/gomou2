@@ -50,7 +50,7 @@ function rechercherItineraires(villeDepart, villeArrivee) {
 
   // Options de voyage
   const optionsVoyage = [
-   // { moyen: 'driving-car', couleur: 'blue', nom: 'Voiture' },
+    { moyen: 'driving-car', couleur: 'blue', nom: 'Voiture' },
     { moyen: 'cycling-regular', couleur: 'orange', nom: 'Vélo' },
     { moyen: 'foot-walking', couleur: 'green', nom: 'Marche' },
   ];
