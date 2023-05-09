@@ -38,3 +38,39 @@ header {
 .resultat li:nth-child(odd) {
   background-color: #FFF; /* Fond blanc */
 }
+
+
+/* Style du tableau */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* Style des cellules */
+td {
+  padding: 10px;
+  border: 1px solid #000;
+}
+
+/* Style des titres */
+th {
+  padding: 10px;
+  border: 1px solid #000;
+  text-align: left;
+}
+
+/* Style des lignes impaires (fond gris) */
+tr:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+
+/* Style des lignes paires (fond blanc) */
+tr:nth-child(even) {
+  background-color: #fff;
+}
+
+/* Centrage du nom de l'itinéraire */
+th:first-child {
+  text-align: center;
+}

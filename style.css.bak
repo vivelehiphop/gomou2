@@ -10,11 +10,13 @@ header {
 }
 
 #ville-depart {
-  color: blue;
+  background-color: blue; /* Fond bleu */
+  color: white; /* Texte blanc */
 }
 
 #ville-arrivee {
-  color: red;
+  background-color: red; /* Fond rouge */
+  color: white; /* Texte blanc */
 }
 
 #resultats {
@@ -26,5 +28,13 @@ header {
 }
 
 .resultat:nth-child(odd) {
+  background-color: #FFF; /* Fond blanc */
+}
+
+.resultat li:nth-child(even) {
+  background-color: #F7F7F7; /* Fond gris */
+}
+
+.resultat li:nth-child(odd) {
   background-color: #FFF; /* Fond blanc */
 }
