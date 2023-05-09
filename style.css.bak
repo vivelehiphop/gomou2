@@ -13,6 +13,10 @@ footer {
   background-color: #808080; /* Fond rouge bordeaux */
   padding: 20px;
   text-align: left;
+    position: fixed;
+  bottom: 0;
+  width: 100%;
+
 }
 
 #ville-depart {
