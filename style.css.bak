@@ -9,6 +9,12 @@ header {
   color: #FFF; /* Texte blanc */
 }
 
+footer {
+  background-color: #808080; /* Fond rouge bordeaux */
+  padding: 20px;
+  text-align: left;
+}
+
 #ville-depart {
   background-color: blue; /* Fond bleu */
   color: white; /* Texte blanc */
