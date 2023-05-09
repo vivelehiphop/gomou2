@@ -62,7 +62,7 @@ function rechercherItineraires(villeDepart, villeArrivee) {
       const itineraires = data.features.map(feature => {
         return {
           nom: "Itinéraire",
-          moyensLocomotion: feature.properties.segments[0].steps.map(step => step.mode),
+          moyensLocomotion: 'voiture', //feature.properties.segments[0].steps.map(step => step.mode),
           distance: (feature.properties.summary.distance / 1000).toFixed(1), // Conversion de mètres en kilomètres avec un chiffre après la virgule
           duration: feature.properties.summary.duration,
           empreinteCarbone: 0 // Valeur de l'empreinte carbone à calculer ultérieurement
