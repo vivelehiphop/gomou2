@@ -11,6 +11,13 @@ searchForm.addEventListener('submit', function(event) {
   });
 });
 
+const correspondanceCO2 = {
+  'driving-car': 0.12,    // Poids en CO2 par kilomètre pour la voiture
+  'cycling-regular': 0.02, // Poids en CO2 par kilomètre pour le vélo
+  'foot-walking': 0       // Poids en CO2 par kilomètre pour la marche (0 car il n'y a pas d'émission de CO2)
+};
+
+
 function geocoder(ville, callback) {
   const accessToken = 'pk.eyJ1Ijoidml2ZWxlaGlwaG9wIiwiYSI6ImNsaGY3ZnNteTFucHEzZXBjdWRpbHVleWMifQ.oQnzrda4UJ1rMR1YeEINhA';
   const geocodingApiUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${ville}.json?access_token=${accessToken}`;
@@ -74,7 +81,12 @@ function rechercherItineraires(villeDepart, villeArrivee) {
           empreinteCarbone: 0
         };
 
-        const empreinteCarbone = (itineraire.distance * 0.251).toFixed(2);
+      // Récupérer le poids en CO2 par kilomètre pour le moyen de locomotion actuel
+const poidsCO2 = correspondanceCO2[moyenVoyage];
+
+// Calculer l'empreinte carbone en multipliant le poids en CO2 par kilomètre par la distance
+const empreinteCarbone = (itineraire.distance * poidsCO2).toFixed(2);
+
         const partQuotaTransport = (empreinteCarbone / 2000) * 100;
 
         // Création d'une ligne pour chaque itinéraire

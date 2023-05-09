@@ -36,8 +36,30 @@ function rechercherItineraires(villeDepart, villeArrivee) {
   const resultatContainer = document.getElementById('resultats');
   resultatContainer.innerHTML = '';
 
+  const tableau = document.createElement('table');
+  tableau.classList.add('itineraire');
+
+  // Création des lignes du tableau
+  const ligneTitres = document.createElement('tr');
+  const celluleMoyensLocomotionTitre = document.createElement('th');
+  celluleMoyensLocomotionTitre.textContent = 'Moyen(s) de locomotion utilisé(s)';
+  ligneTitres.appendChild(celluleMoyensLocomotionTitre);
+  const celluleDistanceTitre = document.createElement('th');
+  celluleDistanceTitre.textContent = 'Distance';
+  ligneTitres.appendChild(celluleDistanceTitre);
+  const celluleDurationTitre = document.createElement('th');
+  celluleDurationTitre.textContent = 'Durée';
+  ligneTitres.appendChild(celluleDurationTitre);
+  const celluleEmpreinteCarboneTitre = document.createElement('th');
+  celluleEmpreinteCarboneTitre.textContent = 'Empreinte carbone';
+  ligneTitres.appendChild(celluleEmpreinteCarboneTitre);
+  const cellulePartQuotaTransportTitre = document.createElement('th');
+  cellulePartQuotaTransportTitre.textContent = 'Part du quota transport annuel';
+  ligneTitres.appendChild(cellulePartQuotaTransportTitre);
+  tableau.appendChild(ligneTitres);
+
   optionsVoyage.forEach((option, index) => {
-    const moyenVoyage = option.moyen;
+        const moyenVoyage = option.moyen;
     const couleur = option.couleur;
     const nom = option.nom;
 
@@ -55,81 +77,45 @@ function rechercherItineraires(villeDepart, villeArrivee) {
         const empreinteCarbone = (itineraire.distance * 0.251).toFixed(2);
         const partQuotaTransport = (empreinteCarbone / 2000) * 100;
 
-        const resultat = document.createElement('div');
-        resultat.classList.add('resultat');
+        // Création d'une ligne pour chaque itinéraire
+        const ligneItineraire = document.createElement('tr');
 
-        const titre = document.createElement('h3');
-        titre.textContent = nom;
-
-        const tableau = document.createElement('table');
-        tableau.classList.add('itineraire');
-
-        const ligneMoyensLocomotionTitre = document.createElement('tr');
-        const celluleMoyensLocomotionTitre = document.createElement('th');
-        celluleMoyensLocomotionTitre.textContent = 'Moyen(s) de locomotion utilisé(s)';
-                ligneMoyensLocomotionTitre.appendChild(celluleMoyensLocomotionTitre);
-        tableau.appendChild(ligneMoyensLocomotionTitre);
-
-        const ligneMoyensLocomotion = document.createElement('tr');
         const celluleMoyensLocomotion = document.createElement('td');
         celluleMoyensLocomotion.textContent = moyenVoyage;
-        ligneMoyensLocomotion.appendChild(celluleMoyensLocomotion);
-        tableau.appendChild(ligneMoyensLocomotion);
+        ligneItineraire.appendChild(celluleMoyensLocomotion);
 
-        const ligneDistanceTitre = document.createElement('tr');
-        const celluleDistanceTitre = document.createElement('th');
-        celluleDistanceTitre.textContent = 'Distance';
-        ligneDistanceTitre.appendChild(celluleDistanceTitre);
-        tableau.appendChild(ligneDistanceTitre);
-
-        const ligneDistance = document.createElement('tr');
         const celluleDistance = document.createElement('td');
         celluleDistance.textContent = `${itineraire.distance} kilomètres`;
-        ligneDistance.appendChild(celluleDistance);
-        tableau.appendChild(ligneDistance);
+        ligneItineraire.appendChild(celluleDistance);
 
-        const ligneDurationTitre = document.createElement('tr');
-        const celluleDurationTitre = document.createElement('th');
-        celluleDurationTitre.textContent = 'Durée';
-        ligneDurationTitre.appendChild(celluleDurationTitre);
-        tableau.appendChild(ligneDurationTitre);
-
-        const ligneDuration = document.createElement('tr');
         const celluleDuration = document.createElement('td');
         const durationHours = Math.floor(itineraire.duration / 3600);
         const durationMinutes = Math.floor((itineraire.duration % 3600) / 60);
         celluleDuration.textContent = `${durationHours} heures ${durationMinutes} minutes`;
-        ligneDuration.appendChild(celluleDuration);
-        tableau.appendChild(ligneDuration);
+        ligneItineraire.appendChild(celluleDuration);
 
-        const ligneEmpreinteCarboneTitre = document.createElement('tr');
-        const celluleEmpreinteCarboneTitre = document.createElement('th');
-        celluleEmpreinteCarboneTitre.textContent = 'Empreinte carbone';
-        ligneEmpreinteCarboneTitre.appendChild(celluleEmpreinteCarboneTitre);
-        tableau.appendChild(ligneEmpreinteCarboneTitre);
-
-        const ligneEmpreinteCarbone = document.createElement('tr');
         const celluleEmpreinteCarbone = document.createElement('td');
         celluleEmpreinteCarbone.textContent = `${empreinteCarbone} kgCO2`;
-        ligneEmpreinteCarbone.appendChild(celluleEmpreinteCarbone);
-        tableau.appendChild(ligneEmpreinteCarbone);
+        ligneItineraire.appendChild(celluleEmpreinteCarbone);
 
-        const lignePartQuotaTransportTitre = document.createElement('tr');
-        const cellulePartQuotaTransportTitre = document.createElement('th');
-        cellulePartQuotaTransportTitre.textContent = 'Part du quota transport annuel';
-        lignePartQuotaTransportTitre.appendChild(cellulePartQuotaTransportTitre);
-        tableau.appendChild(lignePartQuotaTransportTitre);
-
-        const lignePartQuotaTransport = document.createElement('tr');
         const cellulePartQuotaTransport = document.createElement('td');
         cellulePartQuotaTransport.textContent = `${partQuotaTransport.toFixed(2)}%`;
-        lignePartQuotaTransport.appendChild(cellulePartQuotaTransport);
-        tableau.appendChild(lignePartQuotaTransport);
+        ligneItineraire.appendChild(cellulePartQuotaTransport);
 
-        resultat.appendChild(titre);
-        resultat.appendChild(tableau);
+        tableau.appendChild(ligneItineraire);
 
-        resultatContainer.appendChild(resultat);
+        if (index === optionsVoyage.length - 1) {
+          // Ajout du tableau complet une fois toutes les itérations terminées
+          const resultat = document.createElement('div');
+          resultat.classList.add('resultat');
+          const titre = document.createElement('h3');
+          titre.textContent = 'Itinéraires';
+
+          resultat.appendChild(titre);
+          resultat.appendChild(tableau);
+
+          resultatContainer.appendChild(resultat);
+        }
       })
       .catch(error => {
         console.error('Une erreur s\'est produite lors de la recherche d\'itinéraires :', error);
