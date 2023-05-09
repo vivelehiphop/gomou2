@@ -71,7 +71,6 @@ function rechercherItineraires(departCoordinates, arriveeCoordinates) {
       // Effacer les résultats précédents, le cas échéant
       resultatContainer.innerHTML = '';
 
-      // Afficher les itinéraires sur la page
       itineraires.forEach((itineraire, index) => {
         const resultat = document.createElement('div');
         resultat.classList.add('resultat');
@@ -80,28 +79,19 @@ function rechercherItineraires(departCoordinates, arriveeCoordinates) {
         titre.textContent = `Itinéraire ${index + 1}`;
 
         const distance = document.createElement('p');
-        distance.textContent = `Distance : ${itineraire.distance} m`;
+        distance.textContent = `Distance : ${itineraire.distance} mètres`;
 
         const duree = document.createElement('p');
-        duree.textContent = `Durée : ${itineraire.duration} s`;
-
-        const instructions = document.createElement('ul');
-        itineraire.instructions.forEach(instruction => {
-          const instructionItem = document.createElement('li');
-          instructionItem.textContent = instruction;
-          instructions.appendChild(instructionItem);
-        });
+        const durationHours = Math.floor(itineraire.duration / 3600);
+        const durationMinutes = Math.floor((itineraire.duration % 3600) / 60);
+        duree.textContent = `Durée : ${durationHours} heures ${durationMinutes} minutes`;
 
         resultat.appendChild(titre);
         resultat.appendChild(distance);
         resultat.appendChild(duree);
-        resultat.appendChild(instructions);
 
         resultatContainer.appendChild(resultat);
       });
-    })
-    .catch(error => {
-      console.error('Une erreur s\'est produite lors de la recherche d\'itinéraire :', error);
     });
 }
 
