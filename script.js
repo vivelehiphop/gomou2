@@ -1,8 +1,6 @@
 const searchForm = document.getElementById('search-form');
-
 searchForm.addEventListener('submit', function(event) {
   event.preventDefault();
-
   const villeDepart = document.getElementById('ville-depart').value;
   const villeArrivee = document.getElementById('ville-arrivee').value;
 
@@ -30,18 +28,13 @@ function geocoder(ville, callback) {
 
 function rechercherItineraires(villeDepart, villeArrivee) {
   const apiKey = '5b3ce3597851110001cf624815dbf64ad38949df9bfca1525c2137c6';
-
   const optionsVoyage = [
     { moyen: 'driving-car', couleur: 'blue', nom: 'Voiture' },
     { moyen: 'cycling-regular', couleur: 'orange', nom: 'Vélo' },
     { moyen: 'foot-walking', couleur: 'green', nom: 'Marche' },
   ];
-
   const resultatContainer = document.getElementById('resultats');
   resultatContainer.innerHTML = '';
-
-  const tableau = document.createElement('table');
-  tableau.classList.add('itineraire');
 
   optionsVoyage.forEach((option, index) => {
     const moyenVoyage = option.moyen;
@@ -62,41 +55,81 @@ function rechercherItineraires(villeDepart, villeArrivee) {
         const empreinteCarbone = (itineraire.distance * 0.251).toFixed(2);
         const partQuotaTransport = (empreinteCarbone / 2000) * 100;
 
-        const ligne = document.createElement('tr');
-        ligne.classList.add('resultat');
+        const resultat = document.createElement('div');
+        resultat.classList.add('resultat');
 
-        const celluleMoyenLocomotion = document.createElement('td');
-        celluleMoyenLocomotion.textContent = nom;
+        const titre = document.createElement('h3');
+        titre.textContent = nom;
 
+        const tableau = document.createElement('table');
+        tableau.classList.add('itineraire');
+
+        const ligneMoyensLocomotionTitre = document.createElement('tr');
+        const celluleMoyensLocomotionTitre = document.createElement('th');
+        celluleMoyensLocomotionTitre.textContent = 'Moyen(s) de locomotion utilisé(s)';
+                ligneMoyensLocomotionTitre.appendChild(celluleMoyensLocomotionTitre);
+        tableau.appendChild(ligneMoyensLocomotionTitre);
+
+        const ligneMoyensLocomotion = document.createElement('tr');
+        const celluleMoyensLocomotion = document.createElement('td');
+        celluleMoyensLocomotion.textContent = moyenVoyage;
+        ligneMoyensLocomotion.appendChild(celluleMoyensLocomotion);
+        tableau.appendChild(ligneMoyensLocomotion);
+
+        const ligneDistanceTitre = document.createElement('tr');
+        const celluleDistanceTitre = document.createElement('th');
+        celluleDistanceTitre.textContent = 'Distance';
+        ligneDistanceTitre.appendChild(celluleDistanceTitre);
+        tableau.appendChild(ligneDistanceTitre);
+
+        const ligneDistance = document.createElement('tr');
         const celluleDistance = document.createElement('td');
         celluleDistance.textContent = `${itineraire.distance} kilomètres`;
+        ligneDistance.appendChild(celluleDistance);
+        tableau.appendChild(ligneDistance);
 
+        const ligneDurationTitre = document.createElement('tr');
+        const celluleDurationTitre = document.createElement('th');
+        celluleDurationTitre.textContent = 'Durée';
+        ligneDurationTitre.appendChild(celluleDurationTitre);
+        tableau.appendChild(ligneDurationTitre);
+
+        const ligneDuration = document.createElement('tr');
         const celluleDuration = document.createElement('td');
-                const durationHours = Math.floor(itineraire.duration / 3600);
+        const durationHours = Math.floor(itineraire.duration / 3600);
         const durationMinutes = Math.floor((itineraire.duration % 3600) / 60);
-        celluleDuration.textContent = `${durationHours}h ${durationMinutes}min`;
+        celluleDuration.textContent = `${durationHours} heures ${durationMinutes} minutes`;
+        ligneDuration.appendChild(celluleDuration);
+        tableau.appendChild(ligneDuration);
 
+        const ligneEmpreinteCarboneTitre = document.createElement('tr');
+        const celluleEmpreinteCarboneTitre = document.createElement('th');
+        celluleEmpreinteCarboneTitre.textContent = 'Empreinte carbone';
+        ligneEmpreinteCarboneTitre.appendChild(celluleEmpreinteCarboneTitre);
+        tableau.appendChild(ligneEmpreinteCarboneTitre);
+
+        const ligneEmpreinteCarbone = document.createElement('tr');
         const celluleEmpreinteCarbone = document.createElement('td');
         celluleEmpreinteCarbone.textContent = `${empreinteCarbone} kgCO2`;
+        ligneEmpreinteCarbone.appendChild(celluleEmpreinteCarbone);
+        tableau.appendChild(ligneEmpreinteCarbone);
 
+        const lignePartQuotaTransportTitre = document.createElement('tr');
+        const cellulePartQuotaTransportTitre = document.createElement('th');
+        cellulePartQuotaTransportTitre.textContent = 'Part du quota transport annuel';
+        lignePartQuotaTransportTitre.appendChild(cellulePartQuotaTransportTitre);
+        tableau.appendChild(lignePartQuotaTransportTitre);
+
+        const lignePartQuotaTransport = document.createElement('tr');
         const cellulePartQuotaTransport = document.createElement('td');
         cellulePartQuotaTransport.textContent = `${partQuotaTransport.toFixed(2)}%`;
+        lignePartQuotaTransport.appendChild(cellulePartQuotaTransport);
+        tableau.appendChild(lignePartQuotaTransport);
 
-        ligne.appendChild(celluleMoyenLocomotion);
-        ligne.appendChild(celluleDistance);
-        ligne.appendChild(celluleDuration);
-        ligne.appendChild(celluleEmpreinteCarbone);
-        ligne.appendChild(cellulePartQuotaTransport);
+        resultat.appendChild(titre);
+        resultat.appendChild(tableau);
 
-        tableau.appendChild(ligne);
-
-        if (index === optionsVoyage.length - 1) {
-          const titre = document.createElement('h3');
-          titre.textContent = 'Itinéraires';
-
-          resultatContainer.appendChild(titre);
-          resultatContainer.appendChild(tableau);
-        }
+        resultatContainer.appendChild(resultat);
       })
       .catch(error => {
         console.error('Une erreur s\'est produite lors de la recherche d\'itinéraires :', error);
