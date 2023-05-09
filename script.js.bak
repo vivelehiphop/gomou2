@@ -90,9 +90,9 @@ function rechercherItineraires(villeDepart, villeArrivee) {
 
         const ligneMoyensLocomotion = document.createElement('tr');
         const celluleMoyensLocomotionTitre = document.createElement('th');
-        celluleMoyensLocomotionTitre.textContent = 'Moyens de locomotion utilisés';
+        celluleMoyensLocomotionTitre.textContent = 'Moyen(s) de locomotion utilisé(s)';
         const celluleMoyensLocomotion = document.createElement('td');
-        celluleMoyensLocomotion.textContent = itineraire.moyensLocomotion.join(', ');
+        celluleMoyensLocomotion.textContent = 'voiture' /*itineraire.moyensLocomotion.join(', ')*/;
         ligneMoyensLocomotion.appendChild(celluleMoyensLocomotionTitre);
         ligneMoyensLocomotion.appendChild(celluleMoyensLocomotion);
 
