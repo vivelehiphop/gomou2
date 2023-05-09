@@ -12,9 +12,12 @@ searchForm.addEventListener('submit', function(event) {
 });
 
 const correspondanceCO2 = {
-  'driving-car': 0.12,    // Poids en CO2 par kilomètre pour la voiture
-  'cycling-regular': 0.02, // Poids en CO2 par kilomètre pour le vélo
-  'foot-walking': 0       // Poids en CO2 par kilomètre pour la marche (0 car il n'y a pas d'émission de CO2)
+  'driving-car': 0.12,           // Poids en CO2 par kilomètre pour la voiture
+  'cycling-regular': 0.02,       // Poids en CO2 par kilomètre pour le vélo
+  'foot-walking': 0,             // Poids en CO2 par kilomètre pour la marche (0 car il n'y a pas d'émission de CO2)
+  'bus': 0.04,                   // Poids en CO2 par kilomètre pour le bus
+  'train': 0.03,                 // Poids en CO2 par kilomètre pour le train
+  'airplane': 0.2                // Poids en CO2 par kilomètre pour l'avion
 };
 
 
@@ -37,8 +40,10 @@ function rechercherItineraires(villeDepart, villeArrivee) {
   const apiKey = '5b3ce3597851110001cf624815dbf64ad38949df9bfca1525c2137c6';
   const optionsVoyage = [
     { moyen: 'driving-car', couleur: 'blue', nom: 'Voiture' },
-    { moyen: 'cycling-regular', couleur: 'orange', nom: 'Vélo' },
     { moyen: 'foot-walking', couleur: 'green', nom: 'Marche' },
+	{ moyen: 'train', couleur: 'yellow', nom: 'train' },
+    { moyen: 'bus', couleur: 'red', nom: 'bus' },
+    { moyen: 'cycling-regular', couleur: 'orange', nom: 'Vélo' },
   ];
   const resultatContainer = document.getElementById('resultats');
   resultatContainer.innerHTML = '';
