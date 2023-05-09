@@ -115,7 +115,15 @@ function rechercherItineraires(villeDepart, villeArrivee) {
         ligneDuration.appendChild(celluleDuration);
 
         const ligneEmpreinteCarbone = document.createElement('tr');
-          // Cellule pour l'empreinte carbone
+ligneEmpreinteCarbone.classList.add('empreinte-carbone'); // Ajout de la classe "empreinte-carbone"
+ligneEmpreinteCarbone.innerHTML = `
+  <td>Empreinte carbone</td>
+  <td>${moyensLocomotion}</td>
+  <td>${distance.toFixed(1)} km</td>
+  <td>${dureeHeures}:${dureeMinutes}</td>
+  <td>${empreinteCarbone.toFixed(1)} kg CO<sub>2</sub></td>
+`;         
+		 // Cellule pour l'empreinte carbone
 	    const celluleEmpreinteCarboneLabel = document.createElement('td');
 	    celluleEmpreinteCarboneLabel.textContent = 'Empreinte Carbone:';
 	    const celluleEmpreinteCarbone = document.createElement('td');
