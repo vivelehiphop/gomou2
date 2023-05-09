@@ -83,6 +83,8 @@ function rechercherItineraires(villeDepart, villeArrivee) {
         const titre = document.createElement('h3');
         titre.textContent = `${itineraire.nom} ${index + 1}`;
 
+		const empreinteCarbone = (itineraire.distance * 0.251).toFixed(2); // Calcul de l'empreinte carbone (distance en km * 0.251)
+
         const tableau = document.createElement('table');
         tableau.classList.add('itineraire');
 
@@ -113,12 +115,15 @@ function rechercherItineraires(villeDepart, villeArrivee) {
         ligneDuration.appendChild(celluleDuration);
 
         const ligneEmpreinteCarbone = document.createElement('tr');
-        const celluleEmpreinteCarboneTitre = document.createElement('th');
-        celluleEmpreinteCarboneTitre.textContent = 'Empreinte Carbone';
-        const celluleEmpreinteCarbone = document.createElement('td');
-        celluleEmpreinteCarbone.textContent = `${itineraire.empreinteCarbone} kgCO2`; // Valeur de l'empreinte carbone à afficher
-        ligneEmpreinteCarbone.appendChild(celluleEmpreinteCarboneTitre);
-        ligneEmpreinteCarbone.appendChild(celluleEmpreinteCarbone);
+          // Cellule pour l'empreinte carbone
+	    const celluleEmpreinteCarboneLabel = document.createElement('td');
+	    celluleEmpreinteCarboneLabel.textContent = 'Empreinte Carbone:';
+	    const celluleEmpreinteCarbone = document.createElement('td');
+	    celluleEmpreinteCarbone.textContent = `${empreinteCarbone} kgCO2`;
+
+	    ligneEmpreinteCarbone.appendChild(celluleEmpreinteCarboneLabel);
+	    ligneEmpreinteCarbone.appendChild(celluleEmpreinteCarbone);
+
 
         tableau.appendChild(ligneMoyensLocomotion);
         tableau.appendChild(ligneDistance);
