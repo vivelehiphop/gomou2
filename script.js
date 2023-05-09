@@ -41,13 +41,15 @@ function geocoder(ville, callback) {
     });
 }
 
+
+
 // Fonction pour effectuer la requête d'itinéraire à l'API OpenRouteService
-function rechercherItineraires(departCoordinates, arriveeCoordinates) {
+function rechercherItineraires(villeDepart, villeArrivee) {
   // Clé d'accès à l'API OpenRouteService (remplacez par votre propre clé)
   const apiKey = '5b3ce3597851110001cf624815dbf64ad38949df9bfca1525c2137c6';
 
   // URL de l'API OpenRouteService
-  const apiUrl = `https://api.openrouteservice.org/v2/directions/driving-car?api_key=${apiKey}&start=${departCoordinates}&end=${arriveeCoordinates}`;
+  const apiUrl = `https://api.openrouteservice.org/v2/directions/driving-car?api_key=${apiKey}&start=${villeDepart}&end=${villeArrivee}`;
 
   // Effectuer la requête GET à l'API
   fetch(apiUrl)
@@ -59,37 +61,72 @@ function rechercherItineraires(departCoordinates, arriveeCoordinates) {
       // Traiter la réponse de l'API et récupérer les itinéraires
       const itineraires = data.features.map(feature => {
         return {
-          distance: (feature.properties.summary.distance / 1000).toFixed(1),
+          nom: "Itinéraire",
+          moyensLocomotion: feature.properties.segments[0].steps.map(step => step.mode),
+          distance: (feature.properties.summary.distance / 1000).toFixed(1), // Conversion de mètres en kilomètres avec un chiffre après la virgule
           duration: feature.properties.summary.duration,
-          instructions: feature.properties.segments[0].steps.map(step => step.instruction)
+          empreinteCarbone: 0 // Valeur de l'empreinte carbone à calculer ultérieurement
         };
       });
 
-          // Sélectionner l'élément où afficher les résultats
+      // Sélectionner l'élément où afficher les résultats
       const resultatContainer = document.getElementById('resultats');
 
       // Effacer les résultats précédents, le cas échéant
       resultatContainer.innerHTML = '';
 
+      // Afficher les itinéraires sur la page
       itineraires.forEach((itineraire, index) => {
         const resultat = document.createElement('div');
         resultat.classList.add('resultat');
 
         const titre = document.createElement('h3');
-        titre.textContent = `Itinéraire ${index + 1}`;
+        titre.textContent = `${itineraire.nom} ${index + 1}`;
 
-        const distance = document.createElement('p');
-        
-distance.textContent = `Distance : ${itineraire.distance} km`;
+        const tableau = document.createElement('table');
+        tableau.classList.add('itineraire');
 
-        const duree = document.createElement('p');
-        const durationHours = Math.floor(itineraire.duration / 3600);
-        const durationMinutes = Math.floor((itineraire.duration % 3600) / 60);
-        duree.textContent = `Durée : ${durationHours} heures ${durationMinutes} minutes`;
+        const ligneMoyensLocomotion = document.createElement('tr');
+        const celluleMoyensLocomotionTitre = document.createElement('th');
+        celluleMoyensLocomotionTitre.textContent = 'Moyens de locomotion utilisés';
+        const celluleMoyensLocomotion = document.createElement('td');
+        celluleMoyensLocomotion.textContent = itineraire.moyensLocomotion.join(', ');
+        ligneMoyensLocomotion.appendChild(celluleMoyensLocomotionTitre);
+        ligneMoyensLocomotion.appendChild(celluleMoyensLocomotion);
+
+        const ligneDistance = document.createElement('tr');
+        const celluleDistanceTitre = document.createElement('th');
+        celluleDistanceTitre.textContent = 'Distance';
+        const celluleDistance = document.createElement('td');
+        celluleDistance.textContent = `${itineraire.distance} kilomètres`;
+        ligneDistance.appendChild(celluleDistanceTitre);
+        ligneDistance.appendChild(celluleDistance);
+
+                const ligneDuration = document.createElement('tr');
+        const celluleDurationTitre = document.createElement('th');
+        celluleDurationTitre.textContent = 'Durée';
+        const celluleDuration = document.createElement('td');
+        const durationHours = Math.floor(itineraire.duration / 3600); // Calcul des heures
+        const durationMinutes = Math.floor((itineraire.duration % 3600) / 60); // Calcul des minutes
+        celluleDuration.textContent = `${durationHours}h ${durationMinutes}min`;
+        ligneDuration.appendChild(celluleDurationTitre);
+        ligneDuration.appendChild(celluleDuration);
+
+        const ligneEmpreinteCarbone = document.createElement('tr');
+        const celluleEmpreinteCarboneTitre = document.createElement('th');
+        celluleEmpreinteCarboneTitre.textContent = 'Empreinte Carbone';
+        const celluleEmpreinteCarbone = document.createElement('td');
+        celluleEmpreinteCarbone.textContent = `${itineraire.empreinteCarbone} kgCO2`; // Valeur de l'empreinte carbone à afficher
+        ligneEmpreinteCarbone.appendChild(celluleEmpreinteCarboneTitre);
+        ligneEmpreinteCarbone.appendChild(celluleEmpreinteCarbone);
+
+        tableau.appendChild(ligneMoyensLocomotion);
+        tableau.appendChild(ligneDistance);
+        tableau.appendChild(ligneDuration);
+        tableau.appendChild(ligneEmpreinteCarbone);
 
         resultat.appendChild(titre);
-        resultat.appendChild(distance);
-        resultat.appendChild(duree);
+        resultat.appendChild(tableau);
 
         resultatContainer.appendChild(resultat);
       });
