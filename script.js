@@ -132,15 +132,12 @@ function rechercherItineraires(villeDepart, villeArrivee) {
 
 
 // Calcul de la valeur en pourcentage
-const partQuotaTransport = (empreinteCarbone / 2) * 100;
+const partQuotaTransport = (empreinteCarbone / 2000) * 100;
 
 // Création de la ligne "Part du quota transport annuel"
 const ligneQuotaTransport = document.createElement('tr');
 ligneQuotaTransport.innerHTML = `
   <td>Part du quota transport annuel</td>
-  <td></td>
-  <td></td>
-  <td></td>
   <td>${partQuotaTransport.toFixed(2)}%</td>
 `;
 
