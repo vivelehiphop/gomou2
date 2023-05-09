@@ -41,7 +41,7 @@ function geocoder(ville, callback) {
     });
 }
 
-
+/**/
 
 // Fonction pour effectuer la requête d'itinéraire à l'API OpenRouteService
 function rechercherItineraires(villeDepart, villeArrivee) {

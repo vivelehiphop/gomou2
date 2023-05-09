@@ -156,6 +156,20 @@ function rechercherItineraires(villeDepart, villeArrivee) {
 
         // Ajout du résultat à l'élément conteneur des résultats
         resultatContainer.appendChild(resultat);
+		
+		// Trouver l'itinéraire le plus rapide
+const itinerairePlusRapide = itineraires.reduce((itineraireMin, itineraire) => {
+  if (itineraire.duration < itineraireMin.duration) {
+    return itineraire;
+  } else {
+    return itineraireMin;
+  }
+});
+
+// Mettre à jour le titre de l'itinéraire le plus rapide
+titre.textContent = `Le plus rapide ${index + 1}`;
+
+		
       });
   });
 }
