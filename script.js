@@ -114,16 +114,8 @@ function rechercherItineraires(villeDepart, villeArrivee) {
         ligneDuration.appendChild(celluleDurationTitre);
         ligneDuration.appendChild(celluleDuration);
 
- /*       const ligneEmpreinteCarbone = document.createElement('tr');
-ligneEmpreinteCarbone.classList.add('empreinte-carbone'); // Ajout de la classe "empreinte-carbone"
-ligneEmpreinteCarbone.innerHTML = `
-  <td>Empreinte carbone</td>
-  <td>${moyensLocomotion}</td>
-  <td>${distance.toFixed(1)} km</td>
-  <td>${dureeHeures}:${dureeMinutes}</td>
-  <td>${empreinteCarbone.toFixed(1)} kg CO<sub>2</sub></td>
-`; */        
-		 // Cellule pour l'empreinte carbone
+        const ligneEmpreinteCarbone = document.createElement('tr');
+          // Cellule pour l'empreinte carbone
 	    const celluleEmpreinteCarboneLabel = document.createElement('td');
 	    celluleEmpreinteCarboneLabel.textContent = 'Empreinte Carbone:';
 	    const celluleEmpreinteCarbone = document.createElement('td');
@@ -146,6 +138,7 @@ const partQuotaTransport = (empreinteCarbone / 2000) * 100;
 const ligneQuotaTransport = document.createElement('tr');
 ligneQuotaTransport.innerHTML = `
   <td>Part du quota transport annuel</td>
+  
   <td>${partQuotaTransport.toFixed(2)}%</td>
 `;
 
