@@ -1,0 +1,92 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+header {
+  background-color: #8B0000; /* Fond rouge bordeaux */
+  padding: 20px;
+  text-align: center;
+  color: #FFF; /* Texte blanc */
+}
+
+footer {
+  background-color: #efefef; /* Fond gris */
+  text-align: left;
+    position: fixed;
+  bottom: 0;
+  width: 100%;
+
+}
+
+#ville-depart {
+  background-color: #95DBF9; /* Fond bleu */
+  color: #032F42; 
+}
+
+#ville-arrivee {
+  background-color: #F09C8A; /* Fond rouge */
+  color: #631706; 
+}
+
+#resultats {
+  margin-top: 20px;
+}
+
+.resultat:nth-child(even) {
+  background-color: #F7F7F7; /* Fond gris */
+}
+
+.resultat:nth-child(odd) {
+  background-color: #FFF; /* Fond blanc */
+}
+
+.resultat li:nth-child(even) {
+  background-color: #F7F7F7; /* Fond gris */
+}
+
+.resultat li:nth-child(odd) {
+  background-color: #FFF; /* Fond blanc */
+}
+
+
+/* Style du tableau */
+table {
+  border-collapse: collapse;
+  width: 80%;
+  margin: 20px auto; /* Centrer le tableau horizontalement */
+}
+
+/* Style des cellules */
+td {
+  padding: 10px;
+  border: 1px solid #000;
+}
+
+/* Style des titres */
+th {
+  padding: 10px;
+  border: 1px solid #000;
+  text-align: left;
+}
+
+/* Style des lignes impaires (fond gris) */
+tr:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+
+/* Style des lignes paires (fond blanc) */
+tr:nth-child(even) {
+  background-color: #fff;
+}
+
+/* Centrage du nom de l'itinéraire */
+th:first-child {
+  text-align: center;
+}
+
+/* Style pour la ligne "empreinte carbone" */
+#tableau tr.empreinte-carbone {
+  background-color: #ffdada; /* Couleur de fond */
+  color: #ff0000; /* Couleur du texte */
+  font-weight: bold; /* Texte en gras */
+}
