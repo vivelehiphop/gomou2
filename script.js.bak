@@ -12,39 +12,37 @@ searchForm.addEventListener('submit', function(event) {
 });
 
 const correspondanceCO2 = {
-  'driving-car': 0.12,           // Poids en CO2 par kilomètre pour la voiture
-  'cycling-regular': 0.02,       // Poids en CO2 par kilomètre pour le vélo
-  'foot-walking': 0,             // Poids en CO2 par kilomètre pour la marche (0 car il n'y a pas d'émission de CO2)
-  'bus': 0.04,                   // Poids en CO2 par kilomètre pour le bus
-  'train': 0.03,                 // Poids en CO2 par kilomètre pour le train
-  'airplane': 0.2                // Poids en CO2 par kilomètre pour l'avion
+  'DRIVING': 0.12,           // Poids en CO2 par kilomètre pour la voiture
+  'BICYCLING': 0.02,         // Poids en CO2 par kilomètre pour le vélo
+  'WALKING': 0,              // Poids en CO2 par kilomètre pour la marche (0 car il n'y a pas d'émission de CO2)
+  'TRANSIT': 0.04,           // Poids en CO2 par kilomètre pour le bus
+  'TRAIN': 0.03,             // Poids en CO2 par kilomètre pour le train
+  'AIRPLANE': 0.2            // Poids en CO2 par kilomètre pour l'avion
 };
 
-
 function geocoder(ville, callback) {
-  const accessToken = 'pk.eyJ1Ijoidml2ZWxlaGlwaG9wIiwiYSI6ImNsaGY3ZnNteTFucHEzZXBjdWRpbHVleWMifQ.oQnzrda4UJ1rMR1YeEINhA';
-  const geocodingApiUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${ville}.json?access_token=${accessToken}`;
-
-  fetch(geocodingApiUrl)
-    .then(response => response.json())
-    .then(data => {
-      const coordinates = data.features[0].center;
+  const geocoder = new google.maps.Geocoder();
+  geocoder.geocode({ address: ville }, function(results, status) {
+    if (status === google.maps.GeocoderStatus.OK) {
+      const coordinates = results[0].geometry.location;
       callback(coordinates);
-    })
-    .catch(error => {
-      console.error('Une erreur s\'est produite lors du géocodage :', error);
-    });
+    } else {
+      console.error('Une erreur s\'est produite lors du géocodage :', status);
+    }
+  });
 }
 
 function rechercherItineraires(villeDepart, villeArrivee) {
-  const apiKey = '5b3ce3597851110001cf624815dbf64ad38949df9bfca1525c2137c6';
+  const directionsService = new google.maps.DirectionsService();
   const optionsVoyage = [
-    { moyen: 'driving-car', couleur: 'blue', nom: 'Voiture' },
-    { moyen: 'foot-walking', couleur: 'green', nom: 'Marche' },
-	{ moyen: 'cycling-electric', couleur: 'yellow', nom: 'Vélo électrique' },
-    { moyen: 'Wheelchair', couleur: 'red', nom: 'Chaise roulante' },
-    { moyen: 'cycling-regular', couleur: 'orange', nom: 'Vélo' },
+    { moyen: google.maps.TravelMode.DRIVING, couleur: 'blue', nom: 'Voiture' },
+    { moyen: google.maps.TravelMode.WALKING, couleur: 'green', nom: 'Marche' },
+    { moyen: google.maps.TravelMode.BICYCLING, couleur: 'yellow', nom: 'Vélo' },
+    { moyen: google.maps.TravelMode.TRANSIT, couleur: 'orange', nom: 'Bus' },
+    { moyen: google.maps.TravelMode.TRANSIT, couleur: 'purple', nom: 'Train' },
+    { moyen: google.maps.TravelMode.AIRPLANE, couleur: 'red', nom: 'Avion' }
   ];
+
   const resultatContainer = document.getElementById('resultats');
   resultatContainer.innerHTML = '';
 
@@ -59,7 +57,7 @@ function rechercherItineraires(villeDepart, villeArrivee) {
   const celluleDistanceTitre = document.createElement('th');
   celluleDistanceTitre.textContent = 'Distance';
   ligneTitres.appendChild(celluleDistanceTitre);
-  const celluleDurationTitre = document.createElement('th');
+    const celluleDurationTitre = document.createElement('th');
   celluleDurationTitre.textContent = 'Durée';
   ligneTitres.appendChild(celluleDurationTitre);
   const celluleEmpreinteCarboneTitre = document.createElement('th');
@@ -71,26 +69,30 @@ function rechercherItineraires(villeDepart, villeArrivee) {
   tableau.appendChild(ligneTitres);
 
   optionsVoyage.forEach((option, index) => {
-        const moyenVoyage = option.moyen;
+    const moyenVoyage = option.moyen;
     const couleur = option.couleur;
     const nom = option.nom;
 
-    const apiUrl = `https://api.openrouteservice.org/v2/directions/${moyenVoyage}?api_key=${apiKey}&start=${villeDepart}&end=${villeArrivee}`;
+    const request = {
+      origin: villeDepart,
+      destination: villeArrivee,
+      travelMode: moyenVoyage
+    };
 
-    fetch(apiUrl)
-      .then(response => response.json())
-      .then(data => {
+    directionsService.route(request, function(result, status) {
+      if (status === google.maps.DirectionsStatus.OK) {
+        const route = result.routes[0];
         const itineraire = {
-          distance: (data.features[0].properties.summary.distance / 1000).toFixed(1),
-          duration: data.features[0].properties.summary.duration,
+          distance: (route.legs[0].distance.value / 1000).toFixed(1),
+          duration: route.legs[0].duration.value,
           empreinteCarbone: 0
         };
 
-      // Récupérer le poids en CO2 par kilomètre pour le moyen de locomotion actuel
-const poidsCO2 = correspondanceCO2[moyenVoyage];
+        // Récupérer le poids en CO2 par kilomètre pour le moyen de locomotion actuel
+        const poidsCO2 = correspondanceCO2[moyenVoyage];
 
-// Calculer l'empreinte carbone en multipliant le poids en CO2 par kilomètre par la distance
-const empreinteCarbone = (itineraire.distance * poidsCO2).toFixed(2);
+        // Calculer l'empreinte carbone en multipliant le poids en CO2 par kilomètre par la distance
+        const empreinteCarbone = (itineraire.distance * poidsCO2).toFixed(2);
 
         const partQuotaTransport = (empreinteCarbone / 2000) * 100;
 
@@ -98,7 +100,7 @@ const empreinteCarbone = (itineraire.distance * poidsCO2).toFixed(2);
         const ligneItineraire = document.createElement('tr');
 
         const celluleMoyensLocomotion = document.createElement('td');
-        celluleMoyensLocomotion.textContent = moyenVoyage;
+        celluleMoyensLocomotion.textContent = nom;
         ligneItineraire.appendChild(celluleMoyensLocomotion);
 
         const celluleDistance = document.createElement('td');
@@ -123,7 +125,7 @@ const empreinteCarbone = (itineraire.distance * poidsCO2).toFixed(2);
 
         if (index === optionsVoyage.length - 1) {
           // Ajout du tableau complet une fois toutes les itérations terminées
-          const resultat = document.createElement('div');
+                   const resultat = document.createElement('div');
           resultat.classList.add('resultat');
           const titre = document.createElement('h3');
           titre.textContent = 'Itinéraires';
@@ -133,10 +135,11 @@ const empreinteCarbone = (itineraire.distance * poidsCO2).toFixed(2);
 
           resultatContainer.appendChild(resultat);
         }
-      })
-      .catch(error => {
-        console.error('Une erreur s\'est produite lors de la recherche d\'itinéraires :', error);
-      });
+      } else {
+        console.error('Une erreur s\'est produite lors de la recherche d\'itinéraires :', status);
+      }
+    });
   });
 }
+
 

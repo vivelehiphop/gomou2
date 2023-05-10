@@ -90,3 +90,39 @@ button:hover {
 .itineraire td {
   padding-bottom: 5px;
 }
+
+
+
+header {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 50px; /* Ajustez la largeur selon vos besoins */
+  height: 50px; /* Ajustez la hauteur selon vos besoins */
+  margin-right: 10px; /* Ajoutez une marge à droite pour l'espace */
+}
+
+#search-form {
+  display: flex;
+  align-items: center;
+}
+
+#ville-depart,
+#ville-arrivee {
+  margin-right: 10px; /* Ajoutez une marge entre les zones de saisie */
+}
+
+#search-form input[type="submit"] {
+  background-color: #0F1E4D; /* Couleur du fond du bouton */
+  color: #fff; /* Couleur du texte du bouton */
+  padding: 8px 16px; /* Ajoutez un peu de rembourrage */
+  border: none; /* Supprimez la bordure par défaut */
+  cursor: pointer; /* Changez le curseur au survol */
+}
+
+/* Ajoutez ces styles si vous souhaitez aligner le bouton au bas des zones de saisie */
+#search-form {
+  align-items: baseline;
+}
