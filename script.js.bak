@@ -41,7 +41,7 @@ function rechercherItineraires(villeDepart, villeArrivee) {
   const optionsVoyage = [
     { moyen: 'driving-car', couleur: 'blue', nom: 'Voiture' },
     { moyen: 'foot-walking', couleur: 'green', nom: 'Marche' },
-	{ moyen: 'train', couleur: 'yellow', nom: 'train' },
+	{ moyen: 'rail', couleur: 'yellow', nom: 'train' },
     { moyen: 'bus', couleur: 'red', nom: 'bus' },
     { moyen: 'cycling-regular', couleur: 'orange', nom: 'Vélo' },
   ];
