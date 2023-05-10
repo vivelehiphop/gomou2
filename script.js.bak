@@ -40,8 +40,10 @@ function rechercherItineraires(villeDepart, villeArrivee) {
   const apiKey = '5b3ce3597851110001cf624815dbf64ad38949df9bfca1525c2137c6';
   const optionsVoyage = [
     { moyen: 'driving-car', couleur: 'blue', nom: 'Voiture' },
-    { moyen: 'cycling-regular', couleur: 'orange', nom: 'Vélo' },
     { moyen: 'foot-walking', couleur: 'green', nom: 'Marche' },
+	{ moyen: 'train', couleur: 'yellow', nom: 'train' },
+    { moyen: 'bus', couleur: 'red', nom: 'bus' },
+    { moyen: 'cycling-regular', couleur: 'orange', nom: 'Vélo' },
   ];
   const resultatContainer = document.getElementById('resultats');
   resultatContainer.innerHTML = '';
