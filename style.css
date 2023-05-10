@@ -1,23 +1,22 @@
 /* Réinitialisation des styles */
-body, h1, h2, h3, p, ul, li {
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Roboto', sans-serif;
 }
 
-/* Styles spécifiques pour la page */
 body {
-  background-color: #f8f8f8;
-  padding: 20px;
+  font-family: 'Roboto', sans-serif;
+  background-color: #fff;
+  color: #333;
 }
 
 .container {
   max-width: 600px;
   margin: 0 auto;
-  background-color: #fff;
   padding: 20px;
+  border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
 }
 
 h1 {
@@ -35,39 +34,42 @@ label {
   margin-bottom: 5px;
 }
 
-input[type="text"] {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  margin-bottom: 10px;
-  font-size: 14px;
-}
-
+input[type="text"],
 select {
   width: 100%;
-  padding: 8px;
+  padding: 12px;
   border: 1px solid #ddd;
-  border-radius: 4px;
+  border-radius: 8px;
   margin-bottom: 10px;
-  font-size: 14px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+input[type="text"]:hover,
+select:hover {
+  border-color: #4285f4;
 }
 
 button {
-  background-color: #4285f4;
+  background-color: #004d80;
   color: #fff;
-  padding: 10px 20px;
+  padding: 12px 20px;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   font-size: 16px;
   cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #003366;
 }
 
 .resultat {
   margin-bottom: 20px;
   border: 1px solid #ddd;
   padding: 20px;
-  border-radius: 4px;
+  border-radius: 8px;
 }
 
 .resultat h3 {
