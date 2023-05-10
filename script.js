@@ -38,8 +38,8 @@ function rechercherItineraires(villeDepart, villeArrivee) {
     { moyen: google.maps.TravelMode.DRIVING, couleur: 'blue', nom: 'Voiture' },
     { moyen: google.maps.TravelMode.WALKING, couleur: 'green', nom: 'Marche' },
     { moyen: google.maps.TravelMode.BICYCLING, couleur: 'yellow', nom: 'Vélo' },
-    { moyen: google.maps.TravelMode.TRANSIT, couleur: 'purple', nom: 'Train' },
-    { moyen: google.maps.TravelMode.FERRY, couleur: 'red', nom: 'Ferry' }
+    { moyen: google.maps.TravelMode.TRANSIT, couleur: 'purple', nom: 'Train' }/*,
+    { moyen: google.maps.TravelMode.FERRY, couleur: 'red', nom: 'Ferry' }*/
   ];
 
   const resultatContainer = document.getElementById('resultats');
