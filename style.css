@@ -22,10 +22,14 @@ body {
 h1 {
   font-size: 24px;
   margin-bottom: 20px;
+  text-align: center;
+  color: #800000;
 }
 
 form {
   margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
 }
 
 label {
@@ -36,7 +40,7 @@ label {
 
 input[type="text"],
 select {
-  width: 100%;
+  flex: 1;
   padding: 12px;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -51,7 +55,7 @@ select:hover {
 }
 
 button {
-  background-color: #004d80;
+  background-color: #002633;
   color: #fff;
   padding: 12px 20px;
   border: none;
@@ -62,7 +66,7 @@ button {
 }
 
 button:hover {
-  background-color: #003366;
+  background-color: #001a22;
 }
 
 .resultat {
