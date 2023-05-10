@@ -17,7 +17,7 @@ const correspondanceCO2 = {
   'WALKING': 0,              // Poids en CO2 par kilomètre pour la marche (0 car il n'y a pas d'émission de CO2)
   'TRANSIT': 0.04,           // Poids en CO2 par kilomètre pour le bus
   'TRAIN': 0.03,             // Poids en CO2 par kilomètre pour le train
-  'AIRPLANE': 0.2            // Poids en CO2 par kilomètre pour l'avion
+  'FERRY': 0.2            // Poids en CO2 par kilomètre pour l'avion
 };
 
 function geocoder(ville, callback) {
@@ -39,7 +39,7 @@ function rechercherItineraires(villeDepart, villeArrivee) {
     { moyen: google.maps.TravelMode.WALKING, couleur: 'green', nom: 'Marche' },
     { moyen: google.maps.TravelMode.BICYCLING, couleur: 'yellow', nom: 'Vélo' },
     { moyen: google.maps.TravelMode.TRANSIT, couleur: 'purple', nom: 'Train' },
-    { moyen: google.maps.TravelMode.FERRY, couleur: 'red', nom: 'Avion' }
+    { moyen: google.maps.TravelMode.FERRY, couleur: 'red', nom: 'Ferry' }
   ];
 
   const resultatContainer = document.getElementById('resultats');
