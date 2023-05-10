@@ -126,3 +126,19 @@ header {
 #search-form {
   align-items: baseline;
 }
+
+/* Ajoutez ces règles CSS à votre fichier style.css */
+
+.form-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.input-field {
+  flex: 1;
+}
+
+.submit-button {
+  margin-left: 10px;
+}

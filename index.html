@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <img src="path/to/logo.png" alt="Logo" class="logo">
   <title>Empreinte Carbone</title>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFMHhYI2YHb95Gn5FesO1sbnrXyf4c9FM&libraries=places"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap">
@@ -12,6 +13,12 @@
   </header>
   
   <main>
+  <div class="form-container">
+  <input type="text" id="ville-depart" name="ville-depart" class="input-field" placeholder="Entrez la ville de départ" required>
+  <input type="text" id="ville-arrivee" name="ville-arrivee" class="input-field" placeholder="Entrez la ville d'arrivée" required>
+  <input type="submit" value="Rechercher" class="submit-button">
+</div>
+
     <h1>Recherche d'itinéraire</h1>
     <form id="search-form" action="#">
       <label for="ville-depart">Ville de départ :</label>
