@@ -36,9 +36,9 @@ function rechercherItineraires(villeDepart, villeArrivee) {
   const directionsService = new google.maps.DirectionsService();
   const optionsVoyage = [
     { moyen: google.maps.TravelMode.DRIVING, couleur: 'blue', nom: 'Voiture' },
-    { moyen: google.maps.TravelMode.WALKING, couleur: 'green', nom: 'Marche' }/*,
+    { moyen: google.maps.TravelMode.WALKING, couleur: 'green', nom: 'Marche' },
     { moyen: google.maps.TravelMode.BICYCLING, couleur: 'yellow', nom: 'Vélo' },
-    { moyen: google.maps.TravelMode.TRANSIT, couleur: 'orange', nom: 'Bus' },
+    { moyen: google.maps.TravelMode.TRANSIT, couleur: 'orange', nom: 'Bus' }/*,
     { moyen: google.maps.TravelMode.TRANSIT, couleur: 'purple', nom: 'Train' },
     { moyen: google.maps.TravelMode.AIRPLANE, couleur: 'red', nom: 'Avion' }*/
   ];
