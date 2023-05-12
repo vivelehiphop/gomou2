@@ -47,6 +47,9 @@ function rechercherItineraires(villeDepart, villeArrivee) {
 
   const tableau = document.createElement('table');
   tableau.classList.add('itineraire');
+  
+  const carteContainer = document.createElement('div');
+  carteContainer.id = 'carte';
 
   // Création des lignes du tableau
   const ligneTitres = document.createElement('tr');
@@ -77,6 +80,29 @@ function rechercherItineraires(villeDepart, villeArrivee) {
       destination: villeArrivee,
       travelMode: moyenVoyage
     };
+	
+	const carte = new google.maps.Map(carteContainer, {
+    center: villeDepart,
+    zoom: 10
+});
+
+	//Ajoutez des marqueurs pour les villes de départ et d'arrivée
+	const departMarker = new google.maps.Marker({
+	position: villeDepart,
+	map: carte,
+	title: 'Ville de départ'
+	});
+	const arriveeMarker = new google.maps.Marker({
+	position: villeArrivee,
+	map: carte,
+	title: 'Ville d\'arrivée'
+	});
+
+	//ajustez le zoom de la carte pour que les villes de départ et d'arrivée soient visibles
+	const bounds = new google.maps.LatLngBounds();
+	bounds.extend(villeDepart);
+	bounds.extend(villeArrivee);
+	carte.fitBounds(bounds);
 
     directionsService.route(request, function(result, status) {
       if (status === google.maps.DirectionsStatus.OK) {
@@ -86,6 +112,23 @@ function rechercherItineraires(villeDepart, villeArrivee) {
           duration: route.legs[0].duration.value,
           empreinteCarbone: 0
         };
+		
+      // Dessinez la ligne sur la carte
+      const directionsRenderer = new google.maps.DirectionsRenderer({
+        map: carte,
+        directions: result,
+        suppressMarkers: true,
+        polylineOptions: {
+          strokeColor: couleur,
+          strokeOpacity: 0.7,
+          strokeWeight: 5
+        }
+      });
+
+    // ...
+
+
+    // ...
 
         // Récupérer le poids en CO2 par kilomètre pour le moyen de locomotion actuel
         const poidsCO2 = correspondanceCO2[moyenVoyage];
@@ -133,7 +176,16 @@ function rechercherItineraires(villeDepart, villeArrivee) {
           resultat.appendChild(tableau);
 
           resultatContainer.appendChild(resultat);
+		  resultatContainer.appendChild(carteContainer);
         }
+		
+		function initMap() {
+			var myLatLng = {lat: 48.8587741, lng: 2.2069771}; //Coordonnées de la position de départ
+			var map = new google.maps.Map(document.getElementById('map'), {
+				zoom: 12, //Zoom initial
+				center: myLatLng //Centre de la carte
+			});
+		}		
       } else {
         console.error('Une erreur s\'est produite lors de la recherche d\'itinéraires :', status);
       }
